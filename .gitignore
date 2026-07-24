@@ -1,0 +1,12 @@
+# Build artifacts do plugin
+bin/
+obj/
+*.user
+
+# Pacotes de release (anexar nas Releases do GitHub, não versionar)
+dist/
+*.zip
+
+# Dados intermediários / dumps (podem conter texto do jogo)
+*.tmp
+tools/*.json

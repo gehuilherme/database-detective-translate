@@ -1,0 +1,7 @@
+Thanks=Obrigado
+Thanks!=Valeu!
+Nevermind.=Deixa pra lá.
+Nevermind=Deixa pra lá
+Previous=Anterior
+Continue=Continuar
+Confirm=Confirmar

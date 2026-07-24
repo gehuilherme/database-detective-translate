@@ -1,0 +1,4 @@
+Hey there detective!\nWhat do you need help with?=Olá, detetive!\nPrecisa de ajuda?
+What do you need help with?=Precisa de ajuda?
+Which question would you like\nhelp with?=Com qual pergunta\nvocê quer ajuda?
+Hello detective!=Olá, detetive!
