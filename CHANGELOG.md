@@ -2,6 +2,18 @@
 
 Todas as mudanças relevantes deste projeto são documentadas aqui.
 
+## [Não lançado]
+
+### Corrigido
+- **Dados de tabela que estavam traduzidos voltam ao original (102 entradas removidas).** O critério é o próprio jogo: foram extraídos os TextAssets de dados (`players`, `payup`, `movies`, `profiles`, `foods`, `squadrons`…) e o bloco de `Scripts.dll` que preenche as tabelas. Entre os casos: `AS SELECT * FROM`, `CREATE TABLE IF NOT EXISTS`, colunas `date_created`/`time_created`, identificadores (`brochure_1`, `suspect_17432`, `stolen_weapon`…), notas de transação do payup, títulos de filmes/perfis e listas de valores.
+- **Nomes e formatos que o jogador digita nas consultas, restaurados dentro das frases:** usuários (`goldtooth`, `fatcat`, `moneyman`, `bobert`, `grinch`), a pista `"member"`/`"donation"` do caso CA$H BOY$, `payup`, `Knights Against Darkness`, `RARE BURNING SWORD`, `Dark Forests`, moeda (`$200`), horas (`8:00`, `6:30`, `10 PM`), datas (`June 30th`) e números (`1000`).
+- **Quebras de linha recolocadas em ~200 entradas** (`hints`, `mt`) que tinham virado um bloco só. Só mudam espaços e quebras; o texto continua palavra por palavra igual. A transcrição de áudio do início também recuperou uma frase que tinha sumido.
+
+### Adicionado
+- `DatabaseDetective_queryhints_ptbr.txt`: as 100 dicas de consulta do TextAsset `query-hints`, que não tinham tradução. Linhas de SQL, nomes de tabela/coluna e valores ficam idênticos ao original; `=` escapado como `\=`.
+- `DatabaseDetective_ui5_ptbr.txt`: textos de interface, do assistente, títulos de mensagens e mensagens de erro do parser (LIMIT/OFFSET/HAVING/GROUP BY…) que não tinham tradução. As entradas que já eram cobertas pelos regex existentes ficaram de fora.
+- A dica `8;8;5` ("To find the largest shareholder…"), que era a única sem tradução no `hints`.
+
 ## [0.1] - 2026-07-24
 
 Primeira versão pública. Tradução ampla e jogável para PT-BR.
