@@ -32,7 +32,6 @@ Temporary Leave=Licença Temporária
 Reloading current case=Recarregando o caso atual
 Reloading Case=Recarregando o Caso
 No Results Found=Nenhum Resultado Encontrado
-Not Available=Indisponível
 Login Failed=Falha no Login
 Invalid password.=Senha inválida.
 Invalid username or password.=Usuário ou senha inválidos.
