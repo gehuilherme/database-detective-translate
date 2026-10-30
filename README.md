@@ -2,7 +2,7 @@
 
 Mod de tradução **não-oficial** para o jogo **[Database Detective](https://store.steampowered.com/)** (HsuCorp), levando a interface, os diálogos, os erros de SQL, as mensagens, as dicas e o conteúdo dos sites fictícios para **Português do Brasil**.
 
-> ⚠️ **Versão 0.1** — tradução ampla e jogável. O núcleo do jogo (história, tutorial, erros de SQL, UI, dicas) foi traduzido **à mão**; o conteúdo mais extenso dos sites/lore usa uma **tradução automática revisável** (veja [Limitações](#limitações-conhecidas)).
+> ⚠️ **Versão 0.3** — tradução ampla e jogável. O núcleo do jogo (história, tutorial, erros de SQL, UI, dicas) foi traduzido **à mão**; o conteúdo mais extenso dos sites/lore usa uma **tradução automática revisável** (veja [Limitações](#limitações-conhecidas)).
 
 Não afiliado à HsuCorp. Feito por fãs, para fãs.
 
@@ -22,7 +22,7 @@ O jogo é feito em **Unity 6 (Mono)** e não tem sistema de idiomas. A traduçã
 
 ## Requisitos
 
-- **Database Detective** instalado (testado na build `46c5687ce12f42798009f7e408d75353`, Unity `6000.4.3f1`).
+- **Database Detective** instalado (testado no Unity `6000.4.3f1` e `6000.5.5f1`, build Steam `25775427`).
 - Windows 64-bit.
 
 ---
@@ -34,6 +34,19 @@ O jogo é feito em **Unity 6 (Mono)** e não tem sistema de idiomas. A traduçã
    - Steam → clique com o botão direito em **Database Detective** → **Gerenciar** → **Ver arquivos locais**.
 3. **Extraia o conteúdo do `.zip` dentro da pasta do jogo** (onde está o `copOS.exe`), mantendo a estrutura de pastas. Aceite substituir, se perguntar.
 4. Abra o jogo normalmente. Pronto — está em português.
+
+### O jogo fecha/crasha ao abrir?
+
+A partir do Unity `6000.5.5f1` o BepInEx precisa carregar os plugins mais tarde. O `.zip` (v0.3+) já traz o `BepInEx/config/BepInEx.cfg` certo; se você instalou uma versão antiga, extraia o `.zip` novo por cima **aceitando substituir**, ou edite `BepInEx/config/BepInEx.cfg` à mão:
+
+```ini
+[Preloader.Entrypoint]
+Assembly = UnityEngine.CoreModule.dll
+Type = MonoBehaviour
+Method = .cctor
+```
+
+(O padrão do BepInEx é `Type = Application`, que inicia os plugins antes de o motor estar pronto e derruba o jogo. Diagnóstico de @Duarrt na issue #1.)
 
 ### Desinstalar
 

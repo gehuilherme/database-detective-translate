@@ -18,7 +18,7 @@ namespace DatabaseDetective.PTBR
     // Also forces word-wrapping on long translated text so Portuguese (which is
     // longer than English, and whose machine-translated lines may lack the original
     // hard line breaks) wraps inside its window instead of overflowing the HUD.
-    [BepInPlugin("com.ptbr.databasedetective.font", "Database Detective PT-BR Accent Font", "1.0.0")]
+    [BepInPlugin("com.ptbr.databasedetective.font", "Database Detective PT-BR Accent Font", "1.0.1")]
     public class PtbrFontPlugin : BaseUnityPlugin
     {
         private void Awake()
@@ -34,6 +34,11 @@ namespace DatabaseDetective.PTBR
 
         private IEnumerator SetupWhenReady()
         {
+            // Never touch TMP synchronously inside Awake: on Unity 6000.5+ the plugin can
+            // load before the engine is ready, and TMP_Settings.instance (Resources.Load)
+            // crashes natively. Wait one frame first.
+            yield return null;
+
             // Wait until TextMeshPro settings are available.
             float timeout = 30f;
             while (TMP_Settings.instance == null && timeout > 0f)
@@ -114,13 +119,16 @@ namespace DatabaseDetective.PTBR
             if (__instance == null || value == null) return;
             if (value.Length < 16) return;            // leave very short labels alone
             if (value.IndexOf(' ') < 0) return;       // single tokens (data) untouched
-            int id = __instance.GetInstanceID();
+            // GetInstanceID() is a compile error on Unity 6000.5+ (GetEntityId doesn't exist
+            // on 6000.4); Object.GetHashCode() is per-instance and works on both.
+            int id = __instance.GetHashCode();
             if (skip.Contains(id) || handled.Contains(id)) return;
             try
             {
                 // never touch input fields (the SQL query box, name entry, etc.)
                 if (__instance.GetComponentInParent<TMP_InputField>() != null) { skip.Add(id); return; }
-                if (!__instance.enableWordWrapping) __instance.enableWordWrapping = true;
+                if (__instance.textWrappingMode == TextWrappingModes.NoWrap)
+                    __instance.textWrappingMode = TextWrappingModes.Normal;
                 // Auto-shrink longer Portuguese text so it fits fixed-size boxes (speech
                 // bubbles, popups) instead of spilling out. Only shrinks when it doesn't
                 // fit; text that already fits stays at its original size. SDF fonts scale
