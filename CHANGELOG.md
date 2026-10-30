@@ -2,7 +2,17 @@
 
 Todas as mudanças relevantes deste projeto são documentadas aqui.
 
-## [Não lançado]
+## [0.3] - 2026-10-29
+
+### Corrigido
+- **Crash ao abrir no Unity `6000.5.5f1`** (issues #1 e #4). O pacote agora inclui `BepInEx/config/BepInEx.cfg` com o ponto de entrada `Type = MonoBehaviour`: com o padrão (`Application`), o BepInEx iniciava os plugins antes de o motor estar pronto e o jogo fechava ao carregar o XUnity.AutoTranslator ou o plugin de fonte.
+- Plugin de fonte: espera um frame antes de acessar o TextMeshPro (não toca mais no TMP de forma síncrona dentro do `Awake`).
+- Plugin de fonte compila no Unity `6000.5`: `GetInstanceID()` → `GetHashCode()` e `enableWordWrapping` → `textWrappingMode`.
+
+### Alterado
+- O `.zip` passa a incluir as traduções da v0.2 (PR #3), que foi publicada sem pacote `.zip`.
+
+## [0.2] - 2026-10-22
 
 ### Corrigido
 - **Dados de tabela que estavam traduzidos voltam ao original (102 entradas removidas).** O critério é o próprio jogo: foram extraídos os TextAssets de dados (`players`, `payup`, `movies`, `profiles`, `foods`, `squadrons`…) e o bloco de `Scripts.dll` que preenche as tabelas. Entre os casos: `AS SELECT * FROM`, `CREATE TABLE IF NOT EXISTS`, colunas `date_created`/`time_created`, identificadores (`brochure_1`, `suspect_17432`, `stolen_weapon`…), notas de transação do payup, títulos de filmes/perfis e listas de valores.
